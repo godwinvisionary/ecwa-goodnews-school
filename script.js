@@ -170,25 +170,44 @@ document.addEventListener('DOMContentLoaded', initHeroSlider);
 // Intersection Observer for fade-in animations
 function initScrollAnimations() {
     const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -100px 0px'
+        threshold: 0.15,
+        rootMargin: '0px 0px -60px 0px'
     };
 
     const observer = new IntersectionObserver(function(entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
+                entry.target.classList.add('is-visible');
+                if (entry.target.classList.contains('stat-item')) {
+                    animateCounter(entry.target.querySelector('h3'));
+                }
+                observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
 
-    document.querySelectorAll('.feature-card, .event-card, .program-card, .blog-card').forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
-    });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+}
+
+function animateCounter(element) {
+    if (!element) return;
+
+    const target = Number(element.getAttribute('data-count')) || 0;
+    const suffix = element.textContent.includes('+') ? '+' : element.textContent.includes('%') ? '%' : '';
+    const numericTarget = Number(String(target).replace(/\D/g, ''));
+
+    if (!numericTarget) return;
+
+    let current = 0;
+    const step = Math.max(1, Math.ceil(numericTarget / 40));
+    const timer = setInterval(() => {
+        current += step;
+        if (current >= numericTarget) {
+            current = numericTarget;
+            clearInterval(timer);
+        }
+        element.textContent = `${current}${suffix}`;
+    }, 30);
 }
 
 document.addEventListener('DOMContentLoaded', initScrollAnimations);
