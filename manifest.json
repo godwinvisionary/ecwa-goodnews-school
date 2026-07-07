@@ -1,0 +1,9 @@
+{
+  "name": "ECWA Goodnews Schools",
+  "short_name": "ECWA Schools",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1e3c72",
+  "icons": []
+}
