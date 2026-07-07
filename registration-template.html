@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Registration Template Sheet</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 24px;
+            color: #333;
+            background: #f7f9fc;
+        }
+        .sheet {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 28px;
+            border-radius: 10px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+        }
+        h1, h2 { color: #1e3c72; }
+        .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 12px; }
+        .field { border: 1px solid #d8e0e8; padding: 10px; border-radius: 6px; }
+        .field strong { display: block; margin-bottom: 6px; color: #2a5298; }
+        .box { border: 1px solid #d8e0e8; border-radius: 6px; padding: 10px; min-height: 42px; }
+        .btn {
+            display: inline-block;
+            margin-top: 18px;
+            padding: 10px 16px;
+            background: #1e3c72;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+        @media print {
+            .btn { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="sheet">
+        <h1>ECWA GOODNEWS SCHOOLS GRA</h1>
+        <h2>Online Registration Template Sheet</h2>
+        <p>Use this sheet to gather the student information before submitting the online admission form.</p>
+
+        <div class="row">
+            <div class="field"><strong>Student Full Name</strong><div class="box"></div></div>
+            <div class="field"><strong>Gender</strong><div class="box"></div></div>
+        </div>
+
+        <div class="row">
+            <div class="field"><strong>Date of Birth</strong><div class="box"></div></div>
+            <div class="field"><strong>Place of Birth</strong><div class="box"></div></div>
+        </div>
+
+        <div class="row">
+            <div class="field"><strong>Class/Level Applying For</strong><div class="box"></div></div>
+            <div class="field"><strong>Previous School</strong><div class="box"></div></div>
+        </div>
+
+        <div class="row">
+            <div class="field"><strong>Parent/Guardian Name</strong><div class="box"></div></div>
+            <div class="field"><strong>Parent/Guardian Phone</strong><div class="box"></div></div>
+        </div>
+
+        <div class="row">
+            <div class="field"><strong>Email Address</strong><div class="box"></div></div>
+            <div class="field"><strong>Residential Address</strong><div class="box"></div></div>
+        </div>
+
+        <div class="field"><strong>Medical/Additional Information</strong><div class="box" style="min-height: 90px;"></div></div>
+
+        <div class="field" style="margin-top: 12px;"><strong>Required Documents Checklist</strong>
+            <ul>
+                <li>Birth Certificate</li>
+                <li>Previous School Report</li>
+                <li>Passport Photograph</li>
+                <li>Parent/Guardian ID</li>
+                <li>Medical Report</li>
+            </ul>
+        </div>
+
+        <a href="#" class="btn" onclick="window.print(); return false;">Print This Sheet</a>
+    </div>
+</body>
+</html>
