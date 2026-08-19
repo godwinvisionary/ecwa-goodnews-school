@@ -59,9 +59,9 @@
                     <h3>Phone</h3>
                     <p>
                         <strong>Main Office:</strong><br>
-                        +1 (555) 123-4567<br><br>
+                        +234 7036638035<br><br>
                         <strong>Admissions:</strong><br>
-                        +1 (555) 123-4568
+                        +234 7036638035
                     </p>
                 </div>
 
@@ -70,9 +70,10 @@
                     <h3>Email</h3>
                     <p>
                         <strong>General:</strong><br>
-                        <a href="mailto:godwinvisionary@gamil.com" style="color: #2a5298; text-decoration: none;">godwinvisionary@gamil.com</a><br><br>
+                        <!-- Email display (click disabled to avoid mailto usage; form handles messaging) -->
+                        <a href="javascript:void(0);" style="color: #2a5298; text-decoration: none;" title="Contact via form">godwinvisionary@gmail.com</a><br><br>
                         <strong>Admissions:</strong><br>
-                        <a href="mailto:godwinvisionary@gamil.com" style="color: #2a5298; text-decoration: none;">godwinvisionary@gamil.com</a>
+                        <a href="javascript:void(0);" style="color: #2a5298; text-decoration: none;" title="Contact via form">godwinvisionary@gmail.com</a>
                     </p>
                 </div>
             </div>
@@ -108,7 +109,7 @@
             </div>
 
             <h2>Send us a Message</h2>
-            <p style="margin-bottom: 1rem; color: #555;">Messages submitted here will be prepared for delivery to <strong>godwinvisionary@gamil.com</strong>.</p>
+            <p style="margin-bottom: 1rem; color: #555;">Messages submitted here will be prepared for delivery to <strong>godwinvisionary@gmail.com</strong>.</p>
             <form class="form-container" onsubmit="handleFormSubmit(event)">
                 <div class="form-group">
                     <label for="name">Full Name *</label>
@@ -254,8 +255,8 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h4>Contact Info</h4>
-                    <p>Email: godwinvisionary@gamil.com</p>
-                    <p>Phone: +1 (555) 123-4567</p>
+                    <p>Email: godwinvisionary@gmail.com</p>
+                    <p>Phone: +234 7036638035s</p>
                     <p>Address: Along Ministry Of Education GRA, Gombe State, Nigeria</p>
                 </div>
                 <div class="footer-section">
@@ -282,6 +283,8 @@
         </div>
     </footer>
 
+    <!-- EmailJS Browser SDK (loaded only on contact page) -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>

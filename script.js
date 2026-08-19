@@ -100,7 +100,7 @@ function handleFormSubmit(e) {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
-    const recipient = 'godwinvisionary@gamil.com';
+    const recipient = 'godwinvisionary@gmail.com';
     const name = (formData.get('name') || formData.get('full_name') || 'Unknown').toString().trim();
     const email = (formData.get('email') || '').toString().trim();
     const phone = (formData.get('phone') || formData.get('guardian_phone') || '').toString().trim();
@@ -116,9 +116,9 @@ function handleFormSubmit(e) {
         message || 'No additional message provided.'
     ];
 
-    const mailtoLink = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
+    const emailjsLink = `emailjs:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
 
-    window.location.href = mailtoLink;
+    emailjs.send(...)
     alert(`Your email app should open with a message ready to send to ${recipient}.`);
     form.reset();
 
