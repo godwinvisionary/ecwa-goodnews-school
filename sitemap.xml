@@ -1,32 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://example.com/index.html</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://ecwa-goodnews-school.netlify.app/</loc>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.00</priority>
   </url>
   <url>
-    <loc>https://example.com/about.html</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://ecwa-goodnews-school.netlify.app/about.html</loc>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://example.com/courses.html</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://ecwa-goodnews-school.netlify.app/academics.html</loc>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://example.com/admissions.html</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://ecwa-goodnews-school.netlify.app/admissions.html</loc>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://example.com/contact.html</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://ecwa-goodnews-school.netlify.app/news.html</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://ecwa-goodnews-school.netlify.app/gallery.html</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://ecwa-goodnews-school.netlify.app/contact.html</loc>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
   </url>
