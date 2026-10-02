@@ -129,46 +129,51 @@ function animateCounter(element) {
 }
 
 // --- EmailJS Integration for Contact Form ---
-// Initialize EmailJS if the SDK is present on the page (contact.html loads the SDK).
-if (typeof emailjs !== 'undefined' && typeof emailjs.init === 'function') {
-    if (!window._emailjsInitialized) {
-        // Initialize EmailJS with the provided public key (only once)
-        emailjs.init("EhAitOgQxK53GnvBh");
-        window._emailjsInitialized = true;
-    }
+// Initialize EmailJS once using the provided public key.
+if (typeof emailjs !== 'undefined' && typeof emailjs.init === 'function' && !window.__ecwaEmailJsInitialized) {
+    emailjs.init("EhAitOgQxK53GnvBh");
+    window.__ecwaEmailJsInitialized = true;
 }
 
-// handleFormSubmit: replaces mailto usage with EmailJS send
+// handleFormSubmit: sends the contact form through EmailJS without using mailto.
 function handleFormSubmit(e) {
     e.preventDefault();
     const form = e.target;
-
-    // Preserve existing validation
-    if (typeof validateContactForm === 'function') {
-        if (!validateContactForm(form)) return false;
-    }
-
     const submitBtn = form.querySelector('button[type="submit"]') || form.querySelector('button');
     const originalBtnText = submitBtn ? submitBtn.textContent : 'Send Message';
 
-    // Collect values
-    const name = (form.querySelector('#name') && form.querySelector('#name').value) ? form.querySelector('#name').value.trim() : '';
-    const email = (form.querySelector('#email') && form.querySelector('#email').value) ? form.querySelector('#email').value.trim() : '';
-    const phone = (form.querySelector('#phone') && form.querySelector('#phone').value) ? form.querySelector('#phone').value.trim() : '';
-    const subject = (form.querySelector('#subject') && form.querySelector('#subject').value) ? form.querySelector('#subject').value.trim() : '';
-    const message = (form.querySelector('#message') && form.querySelector('#message').value) ? form.querySelector('#message').value.trim() : '';
+    if (typeof validateContactForm === 'function' && !validateContactForm(form)) {
+        return false;
+    }
 
-    const templateParams = { name, email, phone, subject, message };
+    if (!form.checkValidity()) {
+        form.reportValidity();
+        return false;
+    }
 
-    // Disable submit button and show progress
+    const name = form.querySelector('#name') ? form.querySelector('#name').value.trim() : '';
+    const email = form.querySelector('#email') ? form.querySelector('#email').value.trim() : '';
+    const phone = form.querySelector('#phone') ? form.querySelector('#phone').value.trim() : '';
+    const subject = form.querySelector('#subject') ? form.querySelector('#subject').value.trim() : '';
+    const message = form.querySelector('#message') ? form.querySelector('#message').value.trim() : '';
+
+    // EmailJS template payload required by the configured template.
+    const templateParams = {
+        name,
+        email,
+        phone,
+        subject,
+        message
+    };
+
+    // While the form is being submitted, disable the button and show progress.
     if (submitBtn) {
         submitBtn.disabled = true;
         submitBtn.textContent = 'Sending...';
     }
 
-    // Verify EmailJS SDK presence
     if (typeof emailjs === 'undefined' || typeof emailjs.send !== 'function') {
-        showToast('Email service is unavailable. Please try again later.', 'error');
+        showToast('Email service is unavailable right now. Please try again later.', 'error');
         if (submitBtn) {
             submitBtn.disabled = false;
             submitBtn.textContent = originalBtnText;
@@ -176,28 +181,29 @@ function handleFormSubmit(e) {
         return false;
     }
 
-    // Send via EmailJS (service + template provided by user)
+    // Send the form to the configured EmailJS service and template.
     emailjs.send('service_fk8wvv8', 'template_jippfir', templateParams)
-        .then(function(response) {
-            showToast('Message sent successfully. Thank you!', 'success');
-            try { form.reset(); } catch (err) { /* ignore */ }
+        .then(function() {
+            showToast('Your message has been sent successfully. We will get back to you soon.', 'success');
+            form.reset();
             if (submitBtn) {
+                submitBtn.textContent = 'Send Message';
                 submitBtn.disabled = false;
-                submitBtn.textContent = originalBtnText;
             }
-        }, function(error) {
-            console.error('EmailJS error:', error);
-            showToast('Failed to send message. Please try again later.', 'error');
+        })
+        .catch(function(error) {
+            console.error('EmailJS send error:', error);
+            showToast('There was a problem sending your message. Please try again.', 'error');
             if (submitBtn) {
+                submitBtn.textContent = 'Send Message';
                 submitBtn.disabled = false;
-                submitBtn.textContent = originalBtnText;
             }
         });
 
     return false;
 }
 
-// Simple toast notification helper used for success/error UI feedback
+// Notification helper for success and error states without changing the page design.
 function showToast(message, type = 'info', timeout = 5000) {
     const toast = document.createElement('div');
     toast.textContent = message;
@@ -205,18 +211,20 @@ function showToast(message, type = 'info', timeout = 5000) {
     toast.style.cssText = 'position: fixed; right: 20px; bottom: 20px; z-index: 9999; min-width: 240px; padding: 12px 16px; border-radius: 10px; color: #fff; font-family: Poppins, Inter, sans-serif; box-shadow: 0 8px 24px rgba(0,0,0,0.12); font-size: 14px;';
 
     if (type === 'success') {
-        toast.style.background = 'linear-gradient(90deg, #5DADE2, #154360)';
+        toast.style.background = 'linear-gradient(90deg, #1e3c72, #2a5298)';
     } else if (type === 'error') {
-        toast.style.background = 'linear-gradient(90deg, #d9534f, #c12b2b)';
+        toast.style.background = 'linear-gradient(90deg, #d9534f, #b52a2a)';
     } else {
         toast.style.background = 'rgba(20,67,96,0.95)';
     }
 
     document.body.appendChild(toast);
-    setTimeout(() => {
+    setTimeout(function() {
         toast.style.transition = 'opacity 300ms ease, transform 300ms ease';
         toast.style.opacity = '0';
         toast.style.transform = 'translateY(12px)';
-        setTimeout(() => toast.remove(), 350);
+        setTimeout(function() {
+            toast.remove();
+        }, 350);
     }, timeout);
 }

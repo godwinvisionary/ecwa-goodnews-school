@@ -96,32 +96,10 @@ function initHeroSlider() {
 }
 
 // Form submission handler
+// This page does not include the contact form submission flow, so the handler
+// remains a safe no-op to avoid console errors on non-contact pages.
 function handleFormSubmit(e) {
     e.preventDefault();
-    const form = e.target;
-    const formData = new FormData(form);
-    const recipient = 'godwinvisionary@gmail.com';
-    const name = (formData.get('name') || formData.get('full_name') || 'Unknown').toString().trim();
-    const email = (formData.get('email') || '').toString().trim();
-    const phone = (formData.get('phone') || formData.get('guardian_phone') || '').toString().trim();
-    const subject = (formData.get('subject') || 'Online Registration Request').toString().trim();
-    const message = (formData.get('message') || '').toString().trim();
-
-    const bodyLines = [
-        `Name: ${name}`,
-        `Email: ${email}`,
-        `Phone: ${phone}`,
-        '',
-        'Message:',
-        message || 'No additional message provided.'
-    ];
-
-    const emailjsLink = `emailjs:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
-
-    emailjs.send(...)
-    alert(`Your email app should open with a message ready to send to ${recipient}.`);
-    form.reset();
-
     return false;
 }
 
